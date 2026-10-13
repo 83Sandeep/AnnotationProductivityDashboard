@@ -73,17 +73,20 @@ st.sidebar.header("Filters")
 
 annotator_options = sorted(df["Annotator"].unique())
 
+
 selected_annotators = st.sidebar.multiselect(
     "Select annotators",
     annotator_options,
-    default=annotator_options,
+    default=[],
+    placeholder="Choose annotators",
     key="annotator_filter"
 )
 
 selected_types = st.sidebar.multiselect(
     "Annotation type",
     sorted(df["Type"].unique()),
-    default=sorted(df["Type"].unique()),
+    default=[],
+    placeholder="Choose annotation type",
     key="type_filter"
 )
 
@@ -122,9 +125,7 @@ if len(date_range) == 2:
 
 if filtered.empty:
     st.warning("No data found for these filters.")
-    st.stop()
-
-# -----------------------------
+    st.stop()# -----------------------------
 # 4. Calculate key metrics
 # -----------------------------
 total_completed = int(filtered["Completed"].sum())
